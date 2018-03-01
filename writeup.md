@@ -33,18 +33,18 @@ A link to my [project code](https://github.com/baronep/CarND-Traffic-Sign-Classi
 I used the numpy library to calculate summary statistics of the traffic
 signs data set:
 
-* The training set contains 34799 images
-* The validation set contains 4410 images
-* The size of test set is 12630 images
-* The shape of a traffic sign image is 32x32 pixels
-* The number of unique classes/labels in the data set is 43
+* The training set contains **34799 images**
+* The validation set contains **4410 images**
+* The size of test set is **12630 images**
+* The shape of a traffic sign image is **32x32 pixels**
+* The number of unique classes/labels in the data set is **43**
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+Below is a sample of the 43 different classes that makeup the training dataset and a diagram illustrating the distribution of classes in the training dataset
 
-![alt text][class_distribution]
 ![alt_text][class_samples]
+![alt text][class_distribution]
 
 ### Design and Test a Model Architecture
 
