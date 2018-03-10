@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 [new1]: ./new_images/1.jpg "New Sign 1"
 [new2]: ./new_images/2.jpg "New Sign 2"
 [new3]: ./new_images/3.jpg "New Sign 3"
-[new4]: ./new_images/4.png "New Sign 4"
+[new4]: ./new_images/4.jpg "New Sign 4"
 [new5]: ./new_images/5.jpg "New Sign 5"
 
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
@@ -149,7 +149,7 @@ The training rate was tuned by looking at the accuracy plots to determine whethe
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][new1] ![alt text][new2] ![alt text][new3] 
+![alt text][new1 ] ![alt text][new2] ![alt text][new3] 
 ![alt text][new4] ![alt text][new5]
 
 Most of the images are fairly straightforward, except for the animal crossing sign, which looks very similar to the the "Dangerous curve to the left" and "Slippery road" signs.
