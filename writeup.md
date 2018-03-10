@@ -18,7 +18,13 @@ The goals / steps of this project are the following:
 [class_samples]: ./output_images/class_samples.png "Grayscaling"
 [class_distribution_resampled]: ./output_images/class_distribution_resampled.png "Class Distribution Resampled"
 [preprocessed_images]: ./output_images/preprocessed_samples.png "Preprocessed Images"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
+
+[new1]: ./new_images/1.jpg "New Sign 1"
+[new2]: ./new_images/2.jpg "New Sign 2"
+[new3]: ./new_images/3.jpg "New Sign 3"
+[new4]: ./new_images/4.png "New Sign 4"
+[new5]: ./new_images/5.jpg "New Sign 5"
+
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
 [image8]: ./examples/placeholder.png "Traffic Sign 5"
@@ -107,7 +113,14 @@ My final model consisted of the following layers:
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+To train the model, I used the suggested Adams Optimized using the softmax_cross_entropy_with_logits function as the loss function. 
+
+I used the following hyperparameters to train my final configuration:
+
+- EPOCHS: 25
+- BATCH_SIZE: 128
+- LEARNING_RATE: 0.0004
+- keep_rate (dropout): 0.5
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -116,18 +129,19 @@ My final model results were:
 * validation set accuracy of ? 
 * test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+I first started with the stock LeNet architecture used in the LeNetLab with the full RGB images, but I was unable to get higher than about 93% accuracy. In order to improve accuracy, I made the following modifications
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+* I changed the input images to grayscale in order to avoid excess, distracting information. While I attemped to train the layer with RGB data, I did not see a significant difference in the performance of the network using RGB vs grayscale data so I chose grayscale to decrease the training time
+
+* I normalized the number of images in each class. By doing this, we are able to roughly ensure that the same number of each type of sign are used to train the network, preventing undesired biases towards particular signs.
+
+* I made transformations to repeated images to improve robustness. By transforming images, I was able to add more information to the dataset and potentially add to the robustness of the system.
+
+* I added the dropout layers to help the model train redundant representations for the same images
+
+* I added the 3rd convolutional layer to try and help the NN recognize more complex features
+
+The training rate was tuned by looking at the accuracy plots to determine whether or not the accuracy was jumping around at stead state (indicating a learning rate that was too high) or whether the learning rate had yet to reach steady state (indicating a need for more training epochs or a higher learning rate). 
 
 ### Test a Model on New Images
 
@@ -135,10 +149,10 @@ If a well known architecture was chosen:
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][new1] ![alt text][new2] ![alt text][new3] 
+![alt text][new4] ![alt text][new5]
 
-The first image might be difficult to classify because ...
+Most of the images are fairly straightforward, except for the animal crossing sign, which looks very similar to the the "Dangerous curve to the left" and "Slippery road" signs.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
