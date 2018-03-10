@@ -16,8 +16,8 @@ The goals / steps of this project are the following:
 
 [class_distribution]: ./output_images/class_distribution.png "Class Distribution"
 [class_samples]: ./output_images/class_samples.png "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
+[class_distribution_resampled]: ./output_images/class_distribution_resampled.png "Class Distribution Resampled"
+[preprocessed_images]: ./output_images/preprocessed_samples.png "Preprocessed Images"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
 [image7]: ./examples/placeholder.png "Traffic Sign 4"
@@ -55,6 +55,8 @@ The preprocessing of the data consisted of 5 main steps.
 **1. Class type normalization:**
 The initial training dataset is comprised of 43 different classes, but those classes are not evenly distributed among the training set. The class with the most number of images contained 2010 images while the class with the least number of images contained only 180 images. In order to compensate for this, the aim was to modify the dataset such that each class has 2412 images in each class. In order to achieve this, each initial class of images was randomly sampled and duplicated. Each image that was duplicated and re-added to the dataset was slightly transformed in step 2
 
+![alt text][class_distribution_resampled]
+
 **2. Data augmentation:**
 Each image that was duplicated in step 1, underwent a slight transformation. One of 4 transformations was randomly chose and applied with a random bounded magnitude to each image: rotation, shift, zoom and shear. The magnitudes of each shift was chosen to be about 5-10% of the original image in order to avoid overly distoring the image
 
@@ -66,6 +68,10 @@ The images were normalized to balance images contrast (some images were much dar
 
 **5. Normalization:**
 The images were originally encoded using uint8: [0,255], but the images were normalized to [-1.0, 1.0] float64
+
+The following are samples of each class after the images have been preprocessed
+![alt text][preprocessed_images]
+
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
