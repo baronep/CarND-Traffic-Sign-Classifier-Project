@@ -174,7 +174,11 @@ The model was able to correctly guess 4 of the 5 traffic signs, which gives an a
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
 
+The images below were selected at random from google images and resized to 32x32 pixels using GIMP. They were then preprocessed in the same manner as the training, validation and test images.
+
 **Image 1: Speed Limit (30km/h)**
+
+This image was predicted correctly with a fairly high certainty.
 ```
 Class[1]: Speed limit (30km/h) (0.954634)
 Class[2]: Speed limit (50km/h) (0.035700)
@@ -184,6 +188,7 @@ Class[4]: Speed limit (70km/h) (0.000261)
 ```
 
 **Image 2: Turn Left Ahead**
+This image was predicted correctly with a fairly high certainty.
 ```
 Class[34]: Turn left ahead (0.990159)
 Class[35]: Ahead only (0.004857)
@@ -193,6 +198,7 @@ Class[30]: Beware of ice/snow (0.000106)
 ```
 
 **Image 3**
+This image was predicted incorrectly with fairly low certainty. This indicates that there might not have been enough samples in this class in the training set.
 ```
 Class[23]: Slippery road (0.641859)
 Class[19]: Dangerous curve to the left (0.119892)
@@ -202,6 +208,7 @@ Class[11]: Right-of-way at the next intersection (0.014946)
 ```
 
 **Image 4: Speed Limit (70km/h)**
+This image was predicted incorrectly. I predict that this is because the model is overfitted.
 ```
 Class[1]: Speed limit (30km/h) (0.260079)
 Class[8]: Speed limit (120km/h) (0.153737)
@@ -211,6 +218,7 @@ Class[7]: Speed limit (100km/h) (0.111548)
 ```
 
 **Image 5: Bumpy Road**
+This image was predicted correctly with a very high certainty.
 ```
 Class[22]: Bumpy road (0.999979)
 Class[26]: Traffic signals (0.000019)
@@ -218,3 +226,13 @@ Class[25]: Road work (0.000001)
 Class[18]: General caution (0.000000)
 Class[31]: Wild animals crossing (0.000000)
 ```
+
+#### Conclusion:
+
+While I was able to achieve acceptable performance (>93% accuracy on the validation set), I think that the model is overfitted given the discrepancy between the training accuracy and the test/validation accuracy. The next steps for trying to improve this model would be to ...
+
+1. Continute varying the hyperparamters (learning_rate, dropout_rate, etc)
+2. Add/remove the dropout layers from the FC/CNN layers
+3. Add/remove the 3rd convolutional layer (to try and prevent overfitting)b
+4. Adjust the total number of images in the dataset and the magnitude of the random distortions
+5. Adding back in the RGB data (not grayscale)
