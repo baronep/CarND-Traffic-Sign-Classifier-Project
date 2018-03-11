@@ -157,66 +157,65 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-|       		|  									| 
-|      			| 										|
-|    					| 										|
-|       		| 					 				|
-|      			|    							|
+|  Speed Limit (30km/h)     		|  									| 
+|  Turn Left Ahead    			| 										|
+|  Wild Animal Crossing  					| 										|
+|  Speed Limit (70km/h)     		| 					 				|
+|  Bumpy Road    			|    							|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
 
-**Image 1: **
+**Image 1: Speed Limit (30km/h)**
 
 | Probability         	 |                       Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .         |    							| 
-| .     				| 										|
-| .					    | 										|
-| .	      		| 					 				|
-| .  		     |       				|
+| Speed Limit (30km/h)         |    							| 
+|      				| 										|
+| 					    | 										|
+| 	      		| 					 				|
+|   		     |       				|
 
-
-**Image 2**
+**Image 2: Turn Left Ahead**
 
 | Probability         	 |                       Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .         |    							| 
-| .     				| 										|
-| .					    | 										|
-| .	      		| 					 				|
-| .  		     |       				|
+| Turn Left Ahead        |    							| 
+|      				| 										|
+| 					    | 										|
+| 	      		| 					 				|
+|   		     |       				|
 
 **Image 3**
 
 | Probability         	 |                       Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .         |    							| 
-| .     				| 										|
-| .					    | 										|
-| .	      		| 					 				|
-| .  		     |       				|
+| Wild Animal Crossing         |    							| 
+|      				| 										|
+| 					    | 										|
+| 	      		| 					 				|
+|   		     |       				|
 
-**Image 4: **
+**Image 4: Speed Limit (70km/h)**
 
 | Probability         	 |                       Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .         |    							| 
-| .     				| 										|
-| .					    | 										|
-| .	      		| 					 				|
-| .  		     |       				|
+|  Speed Limit (70km/h)        |    							| 
+|      				| 										|
+| 					    | 										|
+| 	      		| 					 				|
+|   		     |       				|
 
 **Image 5: Bumpy Road**
 
 | Probability         	 |                       Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .         |    							| 
-| .     				| 										|
-| .					    | 										|
-| .	      		| 					 				|
-| .  		     |       				|
+| Bumpy Road         |    							| 
+|      				| 										|
+| 					    | 										|
+| 	      		| 					 				|
+|   		     |       				|
 
 
