@@ -1,58 +1,238 @@
-## Project: Build a Traffic Sign Recognition Program
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
-
-Overview
+# **Traffic Sign Recognition** 
 ---
-In this project, you will use what you've learned about deep neural networks and convolutional neural networks to classify traffic signs. You will train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). After the model is trained, you will then try out your model on images of German traffic signs that you find on the web.
 
-We have included an Ipython notebook that contains further instructions 
-and starter code. Be sure to download the [Ipython notebook](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb). 
+**Build a Traffic Sign Recognition Project**
 
-We also want you to create a detailed writeup of the project. Check out the [writeup template](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup. The writeup can be either a markdown file or a pdf document.
-
-To meet specifications, the project will require submitting three files: 
-* the Ipython notebook with the code
-* the code exported as an html file
-* a writeup report either as a markdown or pdf file 
-
-Creating a Great Writeup
----
-A great writeup should include the [rubric points](https://review.udacity.com/#!/rubrics/481/view) as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
-
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
-
-The Project
----
 The goals / steps of this project are the following:
-* Load the data set
+* Load the data set (see below for links to the project data set)
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
-### Dependencies
-This lab requires:
 
-* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
+[//]: # (Image References)
 
-The lab environment can be created with CarND Term1 Starter Kit. Click [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) for the details.
+[class_distribution]: ./output_images/class_distribution.png "Class Distribution"
+[class_samples]: ./output_images/class_samples.png "Grayscaling"
+[class_distribution_resampled]: ./output_images/class_distribution_resampled.png "Class Distribution Resampled"
+[preprocessed_images]: ./output_images/preprocessed_samples.png "Preprocessed Images"
+[training_accuracy]: ./output_images/training_accuracy.png "Training Accuracy"
 
-### Dataset and Repository
+[new1]: ./new_images/1.jpg "New Sign 1"
+[new2]: ./new_images/2.jpg "New Sign 2"
+[new3]: ./new_images/3.jpg "New Sign 3"
+[new4]: ./new_images/4.jpg "New Sign 4"
+[new5]: ./new_images/5.jpg "New Sign 5"
 
-1. Download the data set. The classroom has a link to the data set in the "Project Instructions" content. This is a pickled dataset in which we've already resized the images to 32x32. It contains a training, validation and test set.
-2. Clone the project, which contains the Ipython notebook and the writeup template.
-```sh
-git clone https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project
-cd CarND-Traffic-Sign-Classifier-Project
-jupyter notebook Traffic_Sign_Classifier.ipynb
+[image6]: ./examples/placeholder.png "Traffic Sign 3"
+[image7]: ./examples/placeholder.png "Traffic Sign 4"
+[image8]: ./examples/placeholder.png "Traffic Sign 5"
+
+---
+### Writeup / README
+
+A link to my [project code](https://github.com/baronep/CarND-Traffic-Sign-Classifier-Project/project.ipynb)
+
+### Data Set Summary & Exploration
+
+I used the numpy library to calculate summary statistics of the traffic
+signs data set:
+
+* The training set contains **34799 images**
+* The validation set contains **4410 images**
+* The size of test set is **12630 images**
+* The shape of a traffic sign image is **32x32 pixels**
+* The number of unique classes/labels in the data set is **43**
+
+#### 2. Include an exploratory visualization of the dataset.
+
+Below is a sample of the 43 different classes that makeup the training dataset and a diagram illustrating the distribution of classes in the training dataset
+
+![alt_text][class_samples]
+![alt text][class_distribution]
+
+### Design and Test a Model Architecture
+
+#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
+
+The preprocessing of the data consisted of 5 main steps.
+
+**1. Class type normalization:**
+The initial training dataset is comprised of 43 different classes, but those classes are not evenly distributed among the training set. The class with the most number of images contained 2010 images while the class with the least number of images contained only 180 images. In order to compensate for this, the aim was to modify the dataset such that each class has 2412 images in each class. In order to achieve this, each initial class of images was randomly sampled and duplicated. Each image that was duplicated and re-added to the dataset was slightly transformed in step 2
+
+![alt text][class_distribution_resampled]
+
+**2. Data augmentation:**
+Each image that was duplicated in step 1, underwent a slight transformation. One of 4 transformations was randomly chose and applied with a random bounded magnitude to each image: rotation, shift, zoom and shear. The magnitudes of each shift was chosen to be about 5-10% of the original image in order to avoid overly distoring the image
+
+**3. Grayscale:**
+The images were converted to grayscale using the cv2.cvtColor function
+
+**4. Histogram Equalization:**
+The images were normalized to balance images contrast (some images were much darker than others). In order to achieve this, I used the cv2.equalizeHist function
+
+**5. Normalization:**
+The images were originally encoded using uint8: [0,255], but the images were normalized to [-1.0, 1.0] float64
+
+The following are samples of each class after the images have been preprocessed
+![alt text][preprocessed_images]
+
+
+
+#### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+
+My final model consisted of the following layers:
+
+| Layer         		|     Description	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Input         		| 32x32x1 Grayscale image   							| 
+| Convolution 3x3     	| 1x1 stride, same padding, outputs 28x28x6 	|
+| RELU					|												|
+| Dropout					|												|
+| Max pooling	      	| 2x2 stride,  outputs 14x14x6 				|
+| Convolution 3x3     	| 1x1 stride, same padding, outputs 10x10x16 	|
+| RELU					|												|
+| Dropout					|												|
+| Max pooling	      	| 2x2 stride,  outputs 5x5x16 				|
+| Convolution 3x3     	| 1x1 stride, same padding, outputs 1x1x512 	|
+| RELU					|												|
+| Dropout					|												|
+| Fully connected		| input: 512, output: 120      									|
+| RELU					|												|
+| Dropout					|												|
+| Fully connected		| input: 120, output: 84      									|
+| RELU					|												|
+| Dropout					|												|
+| Fully connected		| input: 84, output: 43      									|
+| Softmax				|         									|
+
+
+#### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+
+To train the model, I used the suggested Adams Optimizer using the softmax_cross_entropy_with_logits function as the loss function. 
+
+I used the following hyperparameters to train my final configuration:
+
+- EPOCHS: 25
+- BATCH_SIZE: 128
+- LEARNING_RATE: 0.0004
+- keep_rate (dropout): 0.5
+
+#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+
+My final model results were:
+* training set accuracy of 0.985
+* validation set accuracy of 0.945
+* test set accuracy of 0.918
+
+
+The following image is a plot of the training accuracy per iteration while training my model
+
+![alt text][training_accuracy]
+
+I first started with the stock LeNet architecture used in the LeNetLab with the full RGB images, but I was unable to get higher than about 93% accuracy. In order to improve accuracy, I made the following modifications
+
+* I changed the input images to grayscale in order to avoid excess, distracting information. While I attemped to train the layer with RGB data, I did not see a significant difference in the performance of the network using RGB vs grayscale data so I chose grayscale to decrease the training time
+
+* I normalized the number of images in each class. By doing this, we are able to roughly ensure that the same number of each type of sign are used to train the network, preventing undesired biases towards particular signs.
+
+* I made transformations to repeated images to improve robustness. By transforming images, I was able to add more information to the dataset and potentially add to the robustness of the system.
+
+* I added the dropout layers to help the model train redundant representations for the same images
+
+* I added the 3rd convolutional layer to try and help the NN recognize more complex features
+
+The training rate was tuned by looking at the accuracy plots to determine whether or not the accuracy was jumping around at stead state (indicating a learning rate that was too high) or whether the learning rate had yet to reach steady state (indicating a need for more training epochs or a higher learning rate). 
+
+### Test a Model on New Images
+
+#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+
+Here are five German traffic signs that I found on the web:
+
+![alt text][new1 ] ![alt text][new2] ![alt text][new3] 
+![alt text][new4] ![alt text][new5]
+
+Most of the images are fairly straightforward, except for the animal crossing sign, which looks very similar to the the "Dangerous curve to the left" and "Slippery road" signs.
+
+#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set 
+
+Here are the results of the prediction:
+
+| Image			        |     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+|  Speed Limit (30km/h)     		|  Speed Limit (30km/h)									| 
+|  Turn Left Ahead    			| Turn Left Ahead										|
+|  Wild Animal Crossing  					| Slippery road										|
+|  Speed Limit (70km/h)     		|  Speed limit (30km/h)					 				|
+|  Bumpy Road    			| Bumpy road   							|
+
+
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+
+#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
+
+The images below were selected at random from google images and resized to 32x32 pixels using GIMP. They were then preprocessed in the same manner as the training, validation and test images.
+
+**Image 1: Speed Limit (30km/h)**
+
+This image was predicted correctly with a fairly high certainty.
+```
+Class[1]: Speed limit (30km/h) (0.954634)
+Class[2]: Speed limit (50km/h) (0.035700)
+Class[0]: Speed limit (20km/h) (0.008747)
+Class[7]: Speed limit (100km/h) (0.000464)
+Class[4]: Speed limit (70km/h) (0.000261)
 ```
 
-### Requirements for Submission
-Follow the instructions in the `Traffic_Sign_Classifier.ipynb` notebook and write the project report using the writeup template as a guide, `writeup_template.md`. Submit the project code and writeup document.
+**Image 2: Turn Left Ahead**
+This image was predicted correctly with a fairly high certainty.
+```
+Class[34]: Turn left ahead (0.990159)
+Class[35]: Ahead only (0.004857)
+Class[38]: Keep right (0.003554)
+Class[3]: Speed limit (60km/h) (0.000948)
+Class[30]: Beware of ice/snow (0.000106)
+```
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+**Image 3**
+This image was predicted incorrectly with fairly low certainty. This indicates that there might not have been enough samples in this class in the training set.
+```
+Class[23]: Slippery road (0.641859)
+Class[19]: Dangerous curve to the left (0.119892)
+Class[31]: Wild animals crossing (0.119260)
+Class[21]: Double curve (0.100218)
+Class[11]: Right-of-way at the next intersection (0.014946)
+```
 
+**Image 4: Speed Limit (70km/h)**
+This image was predicted incorrectly. I predict that this is because the model is overfitted.
+```
+Class[1]: Speed limit (30km/h) (0.260079)
+Class[8]: Speed limit (120km/h) (0.153737)
+Class[4]: Speed limit (70km/h) (0.124491)
+Class[2]: Speed limit (50km/h) (0.124377)
+Class[7]: Speed limit (100km/h) (0.111548)
+```
+
+**Image 5: Bumpy Road**
+This image was predicted correctly with a very high certainty.
+```
+Class[22]: Bumpy road (0.999979)
+Class[26]: Traffic signals (0.000019)
+Class[25]: Road work (0.000001)
+Class[18]: General caution (0.000000)
+Class[31]: Wild animals crossing (0.000000)
+```
+
+#### Conclusion:
+
+While I was able to achieve acceptable performance (>93% accuracy on the validation set), I think that the model is overfitted given the discrepancy between the training accuracy and the test/validation accuracy. The next steps for trying to improve this model would be to ...
+
+1. Continute varying the hyperparamters (learning_rate, dropout_rate, etc)
+2. Add/remove the dropout layers from the FC/CNN layers
+3. Add/remove the 3rd convolutional layer (to try and prevent overfitting)b
+4. Adjust the total number of images in the dataset and the magnitude of the random distortions
+5. Adding back in the RGB data (not grayscale)
