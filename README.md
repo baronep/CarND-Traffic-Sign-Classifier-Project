@@ -33,9 +33,9 @@ The goals / steps of this project are the following:
 ---
 ### Writeup / README
 
-A link to my [project code](https://github.com/baronep/CarND-Traffic-Sign-Classifier-Project/blob/master/project.ipynb)
+A link to my [project code](https://github.com/baronep/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
-A link to the HTML version [project_html](https://github.com/baronep/CarND-Traffic-Sign-Classifier-Project/blob/master/project.html)
+A link to the HTML version [project_html](https://github.com/baronep/CarND-Traffic-Sign-Classifier-Project/blob/master/report.html)
 
 ### Data Set Summary & Exploration
 
