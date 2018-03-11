@@ -111,7 +111,7 @@ My final model consisted of the following layers:
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used the suggested Adams Optimized using the softmax_cross_entropy_with_logits function as the loss function. 
+To train the model, I used the suggested Adams Optimizer using the softmax_cross_entropy_with_logits function as the loss function. 
 
 I used the following hyperparameters to train my final configuration:
 
