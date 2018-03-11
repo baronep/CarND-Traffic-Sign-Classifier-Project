@@ -55,7 +55,7 @@ Below is a sample of the 43 different classes that makeup the training dataset a
 
 ### Design and Test a Model Architecture
 
-#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+#### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
 The preprocessing of the data consisted of 5 main steps.
 
@@ -123,9 +123,9 @@ I used the following hyperparameters to train my final configuration:
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 0.985
+* validation set accuracy of 0.945
+* test set accuracy of 0.918
 
 
 The following image is a plot of the training accuracy per iteration while training my model
@@ -163,11 +163,11 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-|  Speed Limit (30km/h)     		|  									| 
-|  Turn Left Ahead    			| 										|
-|  Wild Animal Crossing  					| 										|
-|  Speed Limit (70km/h)     		| 					 				|
-|  Bumpy Road    			|    							|
+|  Speed Limit (30km/h)     		|  Speed Limit (30km/h)									| 
+|  Turn Left Ahead    			| Turn Left Ahead										|
+|  Wild Animal Crossing  					| Slippery road										|
+|  Speed Limit (70km/h)     		|  Speed limit (30km/h)					 				|
+|  Bumpy Road    			| Bumpy road   							|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
@@ -175,53 +175,46 @@ The model was able to correctly guess 4 of the 5 traffic signs, which gives an a
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
 
 **Image 1: Speed Limit (30km/h)**
-
-| Probability         	 |                       Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Speed Limit (30km/h)         |    							| 
-|      				| 										|
-| 					    | 										|
-| 	      		| 					 				|
-|   		     |       				|
+```
+Class[1]: Speed limit (30km/h) (0.954634)
+Class[2]: Speed limit (50km/h) (0.035700)
+Class[0]: Speed limit (20km/h) (0.008747)
+Class[7]: Speed limit (100km/h) (0.000464)
+Class[4]: Speed limit (70km/h) (0.000261)
+```
 
 **Image 2: Turn Left Ahead**
-
-| Probability         	 |                       Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Turn Left Ahead        |    							| 
-|      				| 										|
-| 					    | 										|
-| 	      		| 					 				|
-|   		     |       				|
+```
+Class[34]: Turn left ahead (0.990159)
+Class[35]: Ahead only (0.004857)
+Class[38]: Keep right (0.003554)
+Class[3]: Speed limit (60km/h) (0.000948)
+Class[30]: Beware of ice/snow (0.000106)
+```
 
 **Image 3**
-
-| Probability         	 |                       Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Wild Animal Crossing         |    							| 
-|      				| 										|
-| 					    | 										|
-| 	      		| 					 				|
-|   		     |       				|
+```
+Class[23]: Slippery road (0.641859)
+Class[19]: Dangerous curve to the left (0.119892)
+Class[31]: Wild animals crossing (0.119260)
+Class[21]: Double curve (0.100218)
+Class[11]: Right-of-way at the next intersection (0.014946)
+```
 
 **Image 4: Speed Limit (70km/h)**
-
-| Probability         	 |                       Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-|  Speed Limit (70km/h)        |    							| 
-|      				| 										|
-| 					    | 										|
-| 	      		| 					 				|
-|   		     |       				|
+```
+Class[1]: Speed limit (30km/h) (0.260079)
+Class[8]: Speed limit (120km/h) (0.153737)
+Class[4]: Speed limit (70km/h) (0.124491)
+Class[2]: Speed limit (50km/h) (0.124377)
+Class[7]: Speed limit (100km/h) (0.111548)
+```
 
 **Image 5: Bumpy Road**
-
-| Probability         	 |                       Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Bumpy Road         |    							| 
-|      				| 										|
-| 					    | 										|
-| 	      		| 					 				|
-|   		     |       				|
-
-
+```
+Class[22]: Bumpy road (0.999979)
+Class[26]: Traffic signals (0.000019)
+Class[25]: Road work (0.000001)
+Class[18]: General caution (0.000000)
+Class[31]: Wild animals crossing (0.000000)
+```
