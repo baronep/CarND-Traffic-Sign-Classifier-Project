@@ -18,6 +18,7 @@ The goals / steps of this project are the following:
 [class_samples]: ./output_images/class_samples.png "Grayscaling"
 [class_distribution_resampled]: ./output_images/class_distribution_resampled.png "Class Distribution Resampled"
 [preprocessed_images]: ./output_images/preprocessed_samples.png "Preprocessed Images"
+[training_accuracy]: ./output_images/training_accuracy.png "Training Accuracy"
 
 [new1]: ./new_images/1.jpg "New Sign 1"
 [new2]: ./new_images/2.jpg "New Sign 2"
@@ -125,6 +126,11 @@ My final model results were:
 * training set accuracy of ?
 * validation set accuracy of ? 
 * test set accuracy of ?
+
+
+The following image is a plot of the training accuracy per iteration while training my model
+
+![alt text][training_accuracy]
 
 I first started with the stock LeNet architecture used in the LeNetLab with the full RGB images, but I was unable to get higher than about 93% accuracy. In order to improve accuracy, I made the following modifications
 
